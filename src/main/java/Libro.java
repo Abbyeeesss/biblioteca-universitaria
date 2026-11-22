@@ -1,66 +1,59 @@
-import java.util.Objects;
-
-/**
- * Representa un libro de la biblioteca universitaria que puede prestarse y devolverse.
- */
 public class Libro {
 
-  private String titulo;
-  private String autor;
-  private boolean disponible = true;
+    private String titulo;
+    private String autor;
+    private boolean disponible = true;
 
-  /**
-   * Crea un libro disponible para préstamo.
-   *
-   * @param titulo título del libro
-   * @param autor autor del libro
-   */
-  public Libro(String titulo, String autor) {
-    this.titulo = titulo;
-    this.autor = autor;
-  }
+    // Problema 1: campo privado nunca utilizado.
+    private String codigoInterno = "SIN-CODIGO";
 
-  public String getTitulo() {
-    return titulo;
-  }
-
-  public String getAutor() {
-    return autor;
-  }
-
-  public boolean estaDisponible() {
-    return disponible;
-  }
-
-  /**
-   * Presta el libro, marcándolo como no disponible.
-   *
-   * @throws IllegalStateException si el libro ya está prestado
-   */
-  public void prestar() {
-    if (!disponible) {
-      throw new IllegalStateException(
-          "Libro no disponible"
-      );
+    public Libro(String titulo, String autor) {
+        this.titulo = titulo;
+        this.autor = autor;
     }
 
-    disponible = false;
-  }
+    public String getTitulo() {
+        return titulo;
+    }
 
-  /**
-   * Devuelve el libro, marcándolo como disponible.
-   */
-  public void devolver() {
-    disponible = true;
-  }
+    public String getAutor() {
+        return autor;
+    }
 
-  /**
-   * Indica si el título del libro coincide en contenido con otro título.
-   *
-   * @param otroTitulo título a comparar
-   * @return {@code true} si ambos títulos son iguales
-   */
-  public boolean esMismoTitulo(String otroTitulo) {
-    return Objects.equals(titulo, otroTitulo);
-  }
+    public boolean estaDisponible() {
+        return disponible;
+    }
+
+    public void prestar() {
+        // Problema 2: salida directa por consola.
+        System.out.println("Prestando libro: " + titulo);
+
+        if (!disponible) {
+            throw new IllegalStateException(
+                "Libro no disponible"
+            );
+        }
+
+        disponible = false;
+    }
+
+    public void devolver() {
+        disponible = true;
+
+        // Problema 3: manejo incorrecto de excepción.
+        try {
+            Integer.parseInt("ABC");
+        } catch (NumberFormatException e) {
+            // Bloque vacío intencional.
+        }
+    }
+
+    public boolean esMismoTitulo(String otroTitulo) {
+        // Problema 4: comparación de referencias.
+        return titulo == otroTitulo;
+    }
+
+    // Problema 5: método privado nunca utilizado.
+    private void registrarAuditoriaInterna() {
+    }
 }
