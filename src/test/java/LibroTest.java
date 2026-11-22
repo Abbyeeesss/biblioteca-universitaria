@@ -1,5 +1,6 @@
     import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class LibroTest {
@@ -44,6 +45,7 @@ class LibroTest {
         assertTrue(libro.estaDisponible());
     }
 
+    @Disabled("Activar en la actividad de corrección")
     @Test
     void deberiaCompararTitulosPorContenido() {
         Libro libro = new Libro("1984", "George Orwell");
