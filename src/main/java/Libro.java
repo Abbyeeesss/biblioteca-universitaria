@@ -1,43 +1,66 @@
 import java.util.Objects;
 
+/**
+ * Representa un libro de la biblioteca universitaria que puede prestarse y devolverse.
+ */
 public class Libro {
 
-    private String titulo;
-    private String autor;
-    private boolean disponible = true;
+  private String titulo;
+  private String autor;
+  private boolean disponible = true;
 
-    public Libro(String titulo, String autor) {
-        this.titulo = titulo;
-        this.autor = autor;
+  /**
+   * Crea un libro disponible para préstamo.
+   *
+   * @param titulo título del libro
+   * @param autor autor del libro
+   */
+  public Libro(String titulo, String autor) {
+    this.titulo = titulo;
+    this.autor = autor;
+  }
+
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public String getAutor() {
+    return autor;
+  }
+
+  public boolean estaDisponible() {
+    return disponible;
+  }
+
+  /**
+   * Presta el libro, marcándolo como no disponible.
+   *
+   * @throws IllegalStateException si el libro ya está prestado
+   */
+  public void prestar() {
+    if (!disponible) {
+      throw new IllegalStateException(
+          "Libro no disponible"
+      );
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
+    disponible = false;
+  }
 
-    public String getAutor() {
-        return autor;
-    }
+  /**
+   * Devuelve el libro, marcándolo como disponible.
+   */
+  public void devolver() {
+    disponible = true;
+  }
 
-    public boolean estaDisponible() {
-        return disponible;
-    }
-
-    public void prestar() {
-        if (!disponible) {
-            throw new IllegalStateException(
-                "Libro no disponible"
-            );
-        }
-
-        disponible = false;
-    }
-
-    public void devolver() {
-        disponible = true;
-    }
-
-    public boolean esMismoTitulo(String otroTitulo) {
-        return Objects.equals(titulo, otroTitulo);
-    }
+  /**
+   * Indica si el título del libro coincide en contenido con otro título.
+   *
+   * @param otroTitulo título a comparar
+   * @return {@code true} si ambos títulos son iguales
+   */
+  public boolean esMismoTitulo(String otroTitulo) {
+    return Objects.equals(titulo, otroTitulo);
+  }
 }
